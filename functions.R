@@ -1,4 +1,4 @@
-# This script defines some generally useful functions for calls for all my R codes.
+# This script defines some generally useful functions for calls from my other R codes.
 
 suppressMessages(require(stringr));
 
