@@ -128,18 +128,14 @@ hypergeo_test = function(deg, ensembl_go_table, threshold){
 }
 
 # This function calculates the p-value based on the number of cross edges.
-cluster_p_value = function(d, pert, n_cluster = 2){
-  # Hierarchical clustering
-  hc = hclust(d);
+cluster_p_value = function(hc, pert, n_cluster = 2){
   cluster = cutree(hc, n_cluster);
   
-  pert_c = cbind(pert, cluster[pert[, "exp_id"]]);
-  colnames(pert_c)[ncol(pert_c)] = "cluster";
-  pert_c = pert_c[!grepl("DMSO", pert_c[,"pert_id"]), ]; # Remove control experiments
-  
-  #pca_plot(enrich_scores_binary,pert_c);
-  
+  pert_c = cbind(pert, cluster[pert[, "exp_id"]])
+  colnames(pert_c)[ncol(pert_c)] = "cluster"
+  pert_c = pert_c[!grepl("DMSO", pert_c[,"pert_id"]), ] # Remove control experiments
   pert_c = pert_dose_time_to_id(pert_c);
+  #pca_plot(enrich_scores_binary,pert_c);
   
   pert_id_uniq = unique(pert_c[,"pert_id"]);
   edge_num = matrix(0, length(pert_id_uniq), 3);
