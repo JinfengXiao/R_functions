@@ -1,7 +1,9 @@
-# This script defines some generally useful functions for calls from my other R codes.
+# This script defines some generally useful functions for calls from my other R codes. To call this script, run:
+# suppressMessages(library(devtools))
+# source_url("https://raw.githubusercontent.com/JinfengXiao/R_functions/master/functions.R")
 
-require(stringr)
-require(inline)
+suppressMessages(require(stringr))
+suppressMessages(require(inline))
 
 # This function reads in a matrix (can be 1-row or 1-col) from a file in a "usual" way.
 read_matrix = function(dir,sep=' ',header=F){
