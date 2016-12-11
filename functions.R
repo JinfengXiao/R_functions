@@ -1,6 +1,7 @@
 # This script defines some generally useful functions for calls from my other R codes.
 
-suppressMessages(require(stringr));
+require(stringr)
+require(inline)
 
 # This function reads in a matrix (can be 1-row or 1-col) from a file in a "usual" way.
 read_matrix = function(dir,sep=' ',header=F){
@@ -73,3 +74,8 @@ multiplot <- function(..., plotlist=NULL, file, cols=1, layout=NULL) {
     }
   }
 }
+
+# A function to get rid of the zombie processes created by the current R process.
+# Reference: http://stackoverflow.com/questions/25388139/r-parallel-computing-and-zombie-processes
+wait = cfunction(body = 'int wstat; while (waitpid(-1, &wstat, WNOHANG) > 0) {};', includes = '#include <sys/wait.h>', convention='.C')
+
